@@ -8,7 +8,7 @@ import { AuthContext } from "./contexts/AuthContext";
 // Firebase
 import { auth, provider } from "./firebase";
 
-import Navbar from "./components/Navbar";
+import MainNavbar from "./components/MainNavbar";
 import ChatSelection from "./components/ChatSelection";
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
 
 	return (
 		<div>
-			<Navbar
+			<MainNavbar
 				user={user}
 				signInUser={signInUser}
 				signOutUser={signOutUser}
