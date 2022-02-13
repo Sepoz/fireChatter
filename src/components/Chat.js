@@ -7,12 +7,17 @@ import { firestore } from "../firebase";
 // Hooks
 import useGetMessages from "../hooks/useGetMessages";
 
+// Components
+import Message from "./Message";
+
 function Chat({ user, selectedRoom }) {
 	const [message, setMessage] = useState("");
 	const [status, setStatus] = useState("typing");
 	const [error, setError] = useState(null);
 
 	const messages = useGetMessages(selectedRoom);
+
+	console.log(messages);
 
 	async function handleNewMessage(event) {
 		event.preventDefault();
@@ -46,36 +51,22 @@ function Chat({ user, selectedRoom }) {
 	}
 
 	return (
-		<div>
-			<h2>Chat</h2>
-
+		<div className="flex flex-col h-screen p-3">
 			{/* TODO use message uid as key for map */}
-			<ul>
+			<ul className="overflow-auto flex flex-col-reverse">
 				{messages.map((msg) => {
-					return (
-						<li>
-							<div>
-								<img
-									
-									src={msg.image}
-									alt="immagine utente"
-								></img>
-								<p>
-									{msg.message}
-								</p>
-								<p>
-									{msg.author}
-								</p>
-							</div>
-						</li>
-					);
+					return <Message msg={msg} />;
 				})}
 			</ul>
 
 			{error !== null && <p>{error}</p>}
 
-			<form onSubmit={handleNewMessage}>
+			<form
+				className="flex justify-center pt-5"
+				onSubmit={handleNewMessage}
+			>
 				<input
+					className="w-3/4 bg-slate-800 rounded-sm"
 					type="text"
 					name="message"
 					value={message}
@@ -83,6 +74,7 @@ function Chat({ user, selectedRoom }) {
 					onChange={(event) => setMessage(event.target.value)}
 				/>
 				<button
+					className="px-3 text-xs lg:text-base bg-orange-800 rounded-sm"
 					type="submit"
 					disabled={message.length === 0 || status === "submitting"}
 				>

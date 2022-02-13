@@ -27,14 +27,17 @@ function useGetMessages(selectedRoom) {
 				selectedRoom,
 				"messages"
 			);
-			const q = query(messagesRef, orderBy("createdAt"), limit(10));
+			const q = query(
+				messagesRef,
+				orderBy("createdAt", "desc"),
+				limit(20)
+			);
 
 			const unsubscribe = onSnapshot(q, (querySnapshot) => {
 				let messagesArray = [];
 
 				querySnapshot.forEach((doc) => {
 					messagesArray.push(doc.data());
-					console.log(doc.data());
 				});
 
 				setMessages([...messagesArray]);

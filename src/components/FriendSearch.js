@@ -40,14 +40,26 @@ function FriendSearch({ user, updateUserRooms }) {
 	}
 
 	return (
-		<div>
+		<div className="flex justify-center content-center">
 			{error !== null && <p>{error}</p>}
 
-			<form
-				onSubmit={handleNewChat}
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				className="h-5 w-5 self-center"
+				viewBox="0 0 20 20"
+				fill="currentColor"
 			>
-				<h2>Aggiungi per chattare</h2>
+				<path d="M9 9a2 2 0 114 0 2 2 0 01-4 0z" />
+				<path
+					fillRule="evenodd"
+					d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a4 4 0 00-3.446 6.032l-2.261 2.26a1 1 0 101.414 1.415l2.261-2.261A4 4 0 1011 5z"
+					clipRule="evenodd"
+				/>
+			</svg>
+
+			<form className="flex" onSubmit={handleNewChat}>
 				<input
+					className="bg-slate-700 rounded-sm"
 					type="text"
 					name="message"
 					value={searchedUser}
@@ -55,6 +67,7 @@ function FriendSearch({ user, updateUserRooms }) {
 					onChange={(event) => setSearchedUser(event.target.value)}
 				/>
 				<button
+					className="px-3 text-xs lg:text-base bg-orange-800 rounded-sm"
 					type="submit"
 					disabled={
 						searchedUser.length === 0 || status === "submitting"

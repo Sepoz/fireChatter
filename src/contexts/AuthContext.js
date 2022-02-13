@@ -28,10 +28,11 @@ function AuthContextProvider({ children }) {
 	useEffect(() => {
 		onAuthStateChanged(auth, async (user) => {
 			if (user) {
+				// get the user from the database
 				const docRef = doc(firestore, "users", user.uid);
 				const docSnap = await getDoc(docRef);
 
-				// add the user if it's not in the database
+				// add the user to the db if it's not in it already
 				if (docSnap.exists()) {
 					console.log("user already in store", docSnap.data());
 
