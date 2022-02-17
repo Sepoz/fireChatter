@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // Firebase
-import { doc, getDoc, addDoc, collection } from "firebase/firestore";
+import { doc, getDoc, setDoc, collection } from "firebase/firestore";
 import { firestore } from "../firebase";
 
 function FriendSearch({ user, updateUserRooms }) {
@@ -15,19 +15,23 @@ function FriendSearch({ user, updateUserRooms }) {
 	async function handleNewChat(event) {
 		event.preventDefault();
 		setStatus("submitting");
-
 		try {
 			const userRef = doc(firestore, "users", searchedUser);
 			const docSnap = await getDoc(userRef);
 
-			if (docSnap.exists()) {
-				const roomRef = await addDoc(collection(firestore, "rooms"), {
-					roomName: `${user.userUID + searchedUser}`,
-					users: [user.userUID, searchedUser],
-				});
+			const newRoomId = `${user.userUID + searchedUser}`;
 
-				// add the new room to the user
-				updateUserRooms(searchedUser, roomRef.id);
+			if (docSnap.exists()) {
+				if (user.userRooms.includes(newRoomId)) {
+					console.log("friend already in a room");
+				} else {
+					await setDoc(doc(firestore, "rooms", newRoomId), {
+						// roomName: `${user.userUID + searchedUser}`,
+						users: [user.userUID, searchedUser],
+					});
+					// add the new room to the user
+					updateUserRooms(searchedUser, newRoomId);
+				}
 			} else {
 				console.log("user not found");
 			}
@@ -66,6 +70,9 @@ function FriendSearch({ user, updateUserRooms }) {
 					disabled={status === "submitting"}
 					onChange={(event) => setSearchedUser(event.target.value)}
 				/>
+
+				{/* insert input for room name */}
+
 				<button
 					className="px-3 text-xs lg:text-base bg-orange-800 rounded-sm"
 					type="submit"

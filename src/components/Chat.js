@@ -52,10 +52,9 @@ function Chat({ user, selectedRoom }) {
 
 	return (
 		<div className="flex flex-col h-screen p-3">
-			{/* TODO use message uid as key for map */}
 			<ul className="overflow-auto flex flex-col-reverse">
 				{messages.map((msg) => {
-					return <Message msg={msg} />;
+					return <Message key={msg.id} msg={msg.data()} />;
 				})}
 			</ul>
 

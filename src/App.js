@@ -63,6 +63,7 @@ function App() {
 					{user
 						? user.userRooms.map((room) => (
 								<RoomButton
+									key={room}
 									room={room}
 									handleRoomSelection={handleRoomSelection}
 								/>

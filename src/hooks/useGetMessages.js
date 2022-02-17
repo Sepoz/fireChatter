@@ -27,6 +27,7 @@ function useGetMessages(selectedRoom) {
 				selectedRoom,
 				"messages"
 			);
+
 			const q = query(
 				messagesRef,
 				orderBy("createdAt", "desc"),
@@ -37,7 +38,7 @@ function useGetMessages(selectedRoom) {
 				let messagesArray = [];
 
 				querySnapshot.forEach((doc) => {
-					messagesArray.push(doc.data());
+					messagesArray.push(doc);
 				});
 
 				setMessages([...messagesArray]);
