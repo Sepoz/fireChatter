@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // Firebase
-import { doc, getDoc, setDoc, collection } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { firestore } from "../firebase";
 
 function FriendSearch({ user, updateUserRooms }) {
@@ -26,11 +26,15 @@ function FriendSearch({ user, updateUserRooms }) {
 					console.log("friend already in a room");
 				} else {
 					await setDoc(doc(firestore, "rooms", newRoomId), {
-						// roomName: `${user.userUID + searchedUser}`,
+						roomName: docSnap.data().userName,
 						users: [user.userUID, searchedUser],
 					});
-					// add the new room to the user
-					updateUserRooms(searchedUser, newRoomId);
+					// add the new room and the room name to the user
+					updateUserRooms(
+						searchedUser,
+						newRoomId,
+						docSnap.data().userName
+					);
 				}
 			} else {
 				console.log("user not found");
@@ -65,13 +69,11 @@ function FriendSearch({ user, updateUserRooms }) {
 				<input
 					className="bg-slate-700 rounded-sm"
 					type="text"
-					name="message"
+					name="friendID"
 					value={searchedUser}
 					disabled={status === "submitting"}
 					onChange={(event) => setSearchedUser(event.target.value)}
 				/>
-
-				{/* insert input for room name */}
 
 				<button
 					className="px-3 text-xs lg:text-base bg-orange-800 rounded-sm"

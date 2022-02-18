@@ -28,11 +28,7 @@ function useGetMessages(selectedRoom) {
 				"messages"
 			);
 
-			const q = query(
-				messagesRef,
-				orderBy("createdAt", "desc"),
-				limit(20)
-			);
+			const q = query(messagesRef, orderBy("createdAt", "desc"));
 
 			const unsubscribe = onSnapshot(q, (querySnapshot) => {
 				let messagesArray = [];

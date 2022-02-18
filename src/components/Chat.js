@@ -17,8 +17,6 @@ function Chat({ user, selectedRoom }) {
 
 	const messages = useGetMessages(selectedRoom);
 
-	console.log(messages);
-
 	async function handleNewMessage(event) {
 		event.preventDefault();
 		setStatus("submitting");
@@ -38,12 +36,10 @@ function Chat({ user, selectedRoom }) {
 				createdAt: serverTimestamp(),
 			};
 
-			const docRef = await addDoc(collectionRef, messagePayload);
+			await addDoc(collectionRef, messagePayload);
 
 			setMessage("");
 			setStatus("typing");
-
-			console.log("Document: ", docRef);
 		} catch (error) {
 			setStatus("typing");
 			setError(error);

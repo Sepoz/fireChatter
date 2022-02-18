@@ -39,6 +39,8 @@ function App() {
 		setSelectedRoom(roomID);
 	}
 
+	//console.log(user.userRooms);
+
 	return (
 		<div className="grid grid-cols-5 h-screen bg-slate-800 text-stone-50 text-xs lg:text-base">
 			<div className="col-span-2 flex flex-col mb-2 p-5">
@@ -63,8 +65,8 @@ function App() {
 					{user
 						? user.userRooms.map((room) => (
 								<RoomButton
-									key={room}
-									room={room}
+									key={room.roomID}
+									room={room.roomName}
 									handleRoomSelection={handleRoomSelection}
 								/>
 						  ))

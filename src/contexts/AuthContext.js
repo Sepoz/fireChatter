@@ -63,7 +63,7 @@ function AuthContextProvider({ children }) {
 	}
 
 	// update both users's userRooms with the new room id
-	async function updateUserRooms(friendID, roomID) {
+	async function updateUserRooms(friendID, roomID, roomName) {
 		// ref user
 		const userRef = doc(firestore, "users", user.userUID);
 
@@ -72,12 +72,12 @@ function AuthContextProvider({ children }) {
 
 		// update user
 		const userSnap = await updateDoc(userRef, {
-			userRooms: arrayUnion(roomID),
+			userRooms: arrayUnion({ roomID: roomID, roomName: roomName }),
 		});
 
 		// update friend
 		const friendSnap = await updateDoc(friendRef, {
-			userRooms: arrayUnion(roomID),
+			userRooms: arrayUnion({ roomID: roomID, roomName: roomName }),
 		});
 
 		// does it return the updated object?
