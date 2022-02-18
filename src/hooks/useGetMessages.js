@@ -1,18 +1,11 @@
 import { useState, useEffect } from "react";
 
 // Firebase
-import {
-	collection,
-	onSnapshot,
-	query,
-	orderBy,
-	limit,
-} from "firebase/firestore";
+import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { firestore } from "../firebase";
 
 // TO DO
 // add the possibility to modify the query
-
 function useGetMessages(selectedRoom) {
 	const [messages, setMessages] = useState([]);
 

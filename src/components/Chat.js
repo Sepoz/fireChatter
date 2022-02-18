@@ -47,7 +47,7 @@ function Chat({ user, selectedRoom }) {
 	}
 
 	return (
-		<div className="flex flex-col h-screen p-3">
+		<div className="flex flex-col justify-end h-screen p-3">
 			<ul className="overflow-auto flex flex-col-reverse">
 				{messages.map((msg) => {
 					return <Message key={msg.id} msg={msg.data()} />;
