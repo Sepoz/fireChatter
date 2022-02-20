@@ -10,7 +10,7 @@ import { auth, provider } from "./firebase";
 
 import MainNavbar from "./components/MainNavbar";
 import FriendSearch from "./components/FriendSearch";
-import RoomButton from "./components/RoomButton";
+import Rooms from "./components/Rooms";
 import Chat from "./components/Chat";
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
 	function signInUser() {
 		signInWithRedirect(auth, provider)
 			.then((result) => {
-				console.log(result.user);
+				console.log("sign in");
 			})
 			.catch((err) => console.log(err));
 	}
@@ -38,8 +38,6 @@ function App() {
 		const roomID = event.target.value;
 		setSelectedRoom(roomID);
 	}
-
-	//console.log(user.userRooms);
 
 	return (
 		<div className="grid grid-cols-5 h-screen bg-slate-800 text-stone-50 text-xs lg:text-base">
@@ -62,15 +60,10 @@ function App() {
 				</div>
 
 				<div className="overflow-y-auto flex flex-col items-center mt-5">
-					{user
-						? user.userRooms.map((room) => (
-								<RoomButton
-									key={room.roomID}
-									room={room.roomName}
-									handleRoomSelection={handleRoomSelection}
-								/>
-						  ))
-						: null}
+					<Rooms
+						user={user}
+						handleRoomSelection={handleRoomSelection}
+					/>
 				</div>
 			</div>
 

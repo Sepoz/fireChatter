@@ -34,7 +34,7 @@ function AuthContextProvider({ children }) {
 
 				// add the user to the db if it's not in it already
 				if (docSnap.exists()) {
-					console.log("user already in store", docSnap.data());
+					console.log("user already in store");
 
 					setUser(docSnap.data());
 				} else {
