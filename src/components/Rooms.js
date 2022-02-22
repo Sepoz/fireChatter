@@ -1,8 +1,10 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../contexts/AuthContext";
+import React from "react";
+
+// Hooks
+import useAuthContext from "../hooks/useAuthContext";
 
 export default function Rooms({ handleRoomSelection }) {
-	const { user } = useContext(AuthContext);
+	let { user } = useAuthContext();
 
 	return (
 		<div>

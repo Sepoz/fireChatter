@@ -1,10 +1,11 @@
 // TRY CONDITIONAL CHAINING
-import React, { useContext } from "react";
+import React from "react";
 
-import { AuthContext } from "../contexts/AuthContext";
+// Hooks
+import useAuthContext from "../hooks/useAuthContext";
 
 function MainNavbar({ signInUser, signOutUser }) {
-	const { user } = useContext(AuthContext);
+	let { user } = useAuthContext();
 
 	return (
 		<div className="container bg-transparent border-b-2 border-orange-800 font-sans">

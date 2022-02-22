@@ -1,12 +1,12 @@
 // ReactJS
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 
-import { signInWithRedirect, signOut } from "firebase/auth";
-
-import { AuthContext } from "./contexts/AuthContext";
+// Hooks
+import useAuthContext from "./hooks/useAuthContext";
 
 // Firebase
 import { auth, provider } from "./firebase";
+import { signInWithRedirect, signOut } from "firebase/auth";
 
 import MainNavbar from "./components/MainNavbar";
 import FriendSearch from "./components/FriendSearch";
@@ -14,7 +14,7 @@ import Rooms from "./components/Rooms";
 import Chat from "./components/Chat";
 
 function App() {
-	const { user, setUserNull, updateUserRooms } = useContext(AuthContext);
+	let { user, setUserNull } = useAuthContext();
 	const [selectedRoom, setSelectedRoom] = useState("");
 
 	function signInUser() {
