@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 // Firebase
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { firestore } from "../firebase";
+import { AuthContext } from "../contexts/AuthContext";
 
-function FriendSearch({ user, updateUserRooms }) {
+function FriendSearch() {
 	const [searchedUser, setSearchedUser] = useState("");
 	const [status, setStatus] = useState("typing");
 	const [error, setError] = useState(null);
+
+	const { user, updateUserRooms } = useContext(AuthContext);
 
 	// what if the chat is already there?
 	// the user should not be able to add again

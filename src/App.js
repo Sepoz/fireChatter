@@ -44,32 +44,21 @@ function App() {
 			<div className="col-span-2 flex flex-col mb-2 p-5">
 				<div>
 					<MainNavbar
-						user={user}
 						signInUser={signInUser}
 						signOutUser={signOutUser}
 					/>
 				</div>
 
-				<div className="mt-5">
-					{user ? (
-						<FriendSearch
-							user={user}
-							updateUserRooms={updateUserRooms}
-						/>
-					) : null}
-				</div>
+				<div className="mt-5">{user ? <FriendSearch /> : null}</div>
 
 				<div className="overflow-y-auto flex flex-col items-center mt-5">
-					<Rooms
-						user={user}
-						handleRoomSelection={handleRoomSelection}
-					/>
+					<Rooms handleRoomSelection={handleRoomSelection} />
 				</div>
 			</div>
 
 			<div className="col-span-3 rounded-sm  bg-slate-700">
 				{user ? (
-					<Chat user={user} selectedRoom={selectedRoom} />
+					<Chat selectedRoom={selectedRoom} />
 				) : (
 					<h2>Accedi per visualizzare la chat</h2>
 				)}

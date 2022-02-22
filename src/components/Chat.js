@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 // Firebase
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
@@ -7,10 +7,14 @@ import { firestore } from "../firebase";
 // Hooks
 import useGetMessages from "../hooks/useGetMessages";
 
-function Chat({ user, selectedRoom }) {
+import { AuthContext } from "../contexts/AuthContext";
+
+function Chat({ selectedRoom }) {
 	const [message, setMessage] = useState("");
 	const [status, setStatus] = useState("typing");
 	const [error, setError] = useState(null);
+
+	const { user } = useContext(AuthContext);
 
 	const messages = useGetMessages(selectedRoom);
 

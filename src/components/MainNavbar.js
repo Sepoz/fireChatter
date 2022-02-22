@@ -1,8 +1,11 @@
 // TRY CONDITIONAL CHAINING
+import React, { useContext } from "react";
 
-import React from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
-function MainNavbar({ user, signInUser, signOutUser }) {
+function MainNavbar({ signInUser, signOutUser }) {
+	const { user } = useContext(AuthContext);
+
 	return (
 		<div className="container bg-transparent border-b-2 border-orange-800 font-sans">
 			<div className="flex justify-between mb-2">
